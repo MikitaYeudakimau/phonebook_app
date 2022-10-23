@@ -2,7 +2,7 @@
 
 ---
 
-### Demo project to explain how learn Django and DRF
+### Demo project for learning Django and DRF
 
 ---
 
