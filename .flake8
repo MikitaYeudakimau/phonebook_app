@@ -1,0 +1,9 @@
+[flake8]
+exclude =
+    .git,
+    .github,
+    __pycache__,
+    .cache,
+    venv,
+    migrations
+max-line-length = 120

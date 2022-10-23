@@ -1,0 +1,78 @@
+{% extends "phonebook/base.html" %}
+{% block title %}
+    All contacts :: {{ block.super }}
+{% endblock %}
+{% block content %}
+	<div class="card mt-3">
+		<div class="card-body">
+			<h5 class="card-title">Search</h5>
+			<h6 class="card-subtitle mt-3 mb-2"></h6>
+			<div class="card-text">
+				<div class="row">
+					<div class="col-6">
+						<form action="" method="get">
+							<div class="row">
+								<div class="col-10">
+									<input type="text" class="form-control" name="query" placeholder="Search by name">
+									<input type="hidden" name="search_by" value="name">
+								</div>
+								<div class="col-2">
+									<button type="submit" class="btn btn-success">Search</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-6">
+						<form action="" method="get">
+							<div class="row">
+								<div class="col-10">
+									<input type="text" class="form-control" name="query" placeholder="Search by phone">
+									<input type="hidden" name="search_by" value="phone">
+								</div>
+								<div class="col-2">
+									<button type="submit" class="btn btn-success">Search</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="card mt-3">
+		<div class="card-body">
+			<h5 class="card-title">Persons</h5>
+			<h6 class="card-subtitle mt-3 mb-2">{{ search_mes }}</h6>
+			<p class="card-text">
+			<table class="table">
+				<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Person</th>
+					<th scope="col">Phones</th>
+					<th scope="col">Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for person in persons %}
+					<tr>
+						<th scope="row">{{ person.pk }}</th>
+						<th>{{ person.name }}</th>
+						<th>{{ person.all_phones_to_string }}</th>
+						<th>
+							{% if request.user.is_authenticated %}
+							<a href="{% url 'delete_contact' person.pk %}">
+								<button type="button" class="btn btn-danger">Delete</button>
+							</a>
+							{% else %}
+								<p class="text-danger">Forbidden</p>
+							{% endif %}
+						</th>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			</p>
+		</div>
+	</div>
+{% endblock %}
